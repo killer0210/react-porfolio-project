@@ -193,10 +193,68 @@ body {
   @apply p-6 bg-gradient-to-b from-[var(--color-storm)] to-[var(--color-indigo)] rounded-2xl;
 }
 
+.grid-default-color1 {
+  @apply bg-gradient-to-b from-[var(--color-storm)] to-[var(--color-indigo)];
+}
+
 .grid-special-color {
   @apply p-6 bg-gradient-to-b from-[var(--color-royal)] to-[var(--color-lavender)] rounded-2xl;
 }
 
 .grid-black-color {
   @apply p-6 bg-gradient-to-tl from-[#3A3A3A] via-[#242424] to-[#3A3A3A] rounded-2xl;
+}
+
+.card {
+  position: relative;
+  /* Tailwind ч хийж чадна, гэхдээ эффектэнд хэрэгтэй */
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3);
+}
+
+/* Эхэндээ нуух */
+.card::before,
+.card::after {
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+
+.card:before {
+  content: "";
+  background-image: conic-gradient(#04b0ee 20deg,
+      transparent 120deg);
+  position: absolute;
+  left: -25%;
+  top: -25%;
+  height: 150%;
+  width: 150%;
+  animation: rotate 2s infinite linear;
+
+}
+
+.card:after {
+  content: "";
+  position: absolute;
+  border-radius: 12px;
+  top: 1.5%;
+  left: 1.5%;
+  height: 97%;
+  width: 97%;
+  color: #04b0ee;
+  background-color: #1c1b29;
+  z-index: 1;
+  padding: 1rem;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.card:hover::before,
+.card:hover::after {
+  opacity: 1;
 }
