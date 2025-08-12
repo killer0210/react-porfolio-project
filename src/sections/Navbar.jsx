@@ -12,6 +12,9 @@ function Navigation() {
                 <a className='nav-link' href="#projects">Projects</a>
             </li>
             <li className='nav-li'>
+                <a className='nav-link' href="#products">Products</a>
+            </li>
+            <li className='nav-li'>
                 <a className='nav-link' href="#contact">Contact</a>
             </li>
         </ul>
