@@ -1,7 +1,9 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom"
 
-const DetailsModal = ({ product, onClose, onAddToCart }) => {
+const DetailsModal = ({ product, onClose }) => {
     if (!product) return null;
+    const navigate = useNavigate()
 
     return (
         <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4'>
@@ -14,22 +16,13 @@ const DetailsModal = ({ product, onClose, onAddToCart }) => {
                         <button className='text-neutral-300 hover:text-white' onClick={onClose}>✕</button>
                     </div>
                     <p className='subtext'>{product.description}</p>
-                    <div className='flex gap-2 flex-wrap'>
-                        {product.techStack.map((tech) => (
-                            <span
-                                key={tech}
-                                className="px-3 py-1 rounded-full bg-storm text-sm text-neutral-200"
-                            >
-                                {tech}
-                            </span>
-                        ))}
-                    </div>
-                    <div className='flex items-center justify-between pt-2'>
-                        <p className='text-xl font-semibold'>${product.price}</p>
-                        <button className='rounded-lg bg-royal hover:bg-lavender text-white px-4 py-2'
-                            onClick={() => onAddToCart(product)}> Add to Cart</button>
 
-                    </div>
+                    <button
+                        onClick={() => navigate(`/products/${product.id}`)}
+                        className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                    >
+                        View Full Details
+                    </button>
                 </div>
             </div>
         </div >

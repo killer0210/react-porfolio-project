@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ProductCard from '../components/ProductCard'
 import DetailsModal from '../components/DetailsModal'
 import ShoppingCart from '../components/ShoppingCart'
-
+import { useNavigate } from "react-router-dom";
 
 const initialProducts = [
     {
@@ -62,12 +62,13 @@ const initialProducts = [
 ]
 
 const Products = () => {
-    // State - аль product-ийг сонгосон, модал нээлтэй эсэхийг удирдах 
+    // State - аль product - ийг сонгосон, модал нээлтэй эсэхийг удирдах
     const [selectedProduct, setSelectedProduct] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
     // ShoppingCart-ийг удирдах state
     const [cartItems, setCartItems] = useState([])
     const [showCart, setShowCart] = useState(false)
+    const navigate = useNavigate();
 
     // View details дархад дуудагдах функц 
     const handleViewDetails = (product) => {
@@ -119,74 +120,32 @@ const Products = () => {
     }
 
 
-    // 2. Add to Cart function
 
     return (
-        <section className='c-space section-spacing md:max-h-screen' id='products'>
+        <section className='c-space pt-20 md:pt-30  ' id='products'>
             <div className='flex items-center justify-between'>
                 <h2 className='text-heading'>Our Products</h2>
-                <button className='relative rounded-lg bg-royal hover:bg-lavender text-white px-4 py-2 transition-colors' onClick={() => setShowCart(true)}  > Cart
-                    {cartItems.length > 0 && (
-                        <span className="ml-2 inline-flex items-center justify-center text-xs bg-white text-royal rounded-full h-5 min-w-5 px-1">
-                            {cartItems.reduce((sum, item) => sum + item.quantity, 0)}
-                        </span>
-                    )}
+                <button className='relative rounded-lg bg-royal hover:bg-lavender text-white px-4 py-2 transition-colors' onClick={() => navigate('/projectsList')}> All
                 </button>
             </div>
 
-            {
-                showCart ? (<div className='max-w-2xl mx-auto mt-6'>
-                    <ShoppingCart
-                        cartItems={cartItems}
-                        onRemove={removeFromCart}
-                        onCheckout={handleCheckout}
-                        onContinueShopping={handleContinueShopping}
-                    /></div>) : (<div className='mt-6 grid grid-cols-4 grid-rows-3 gap-4'>
-                        <div className='col-span-4 md:col-span-1 row-span-1 row-span-3 rounded-lg shadow-sm bg-gradient-to-b from-[var(--color-storm)] to-[var(--color-indigo)] p-4'>
-                            <ul>
-                                <li>
-                                    <button className='w-full text-left px-3 py-2 rounded-lg hover:bg-indigo-500'>All</button>
-                                </li>
-                                <li>
-                                    <button className='w-full text-left px-3 py-2 rounded-lg hover:bg-indigo-500'>Template</button>
-                                </li>
-                                <li>
-                                    <button className='w-full text-left px-3 py-2 rounded-lg hover:bg-indigo-500'>Web</button>
-                                </li>
-                                <li>
-                                    <button className='w-full text-left px-3 py-2 rounded-lg hover:bg-indigo-500'>App</button>
-                                </li>
-                                <li>
-                                    <button className='w-full text-left px-3 py-2 rounded-lg hover:bg-indigo-500'>Full Project</button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className='col-span-4 md:col-span-3 row-span-2 md:row-span-3 rounded-lg max-h-[80vh]  overflow-y-auto'>
-                            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pr-2'>
-                                {initialProducts.map((product) => (
-                                    <ProductCard
-                                        key={product.id}
-                                        product={product}
-                                        onView={handleViewDetails}
-                                    // Add to Cart товчны үйлдэл
-                                    />
-                                ))}
+            <div className='mt-6 grid grid-cols-4 grid-rows-2 gap-4'>
+                <div className='col-span-4 row-span-2  rounded-lg min-h-[80vh]  overflow-y-auto'>
+                    <div className='grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4  gap-4 pr-2'>
+                        {initialProducts.map((product) => (
+                            <ProductCard
+                                key={product.id}
+                                product={product}
+                                onView={handleViewDetails}
 
-                            </div>
-                        </div>
-                    </div>)
-            }
+                            />
+                        ))}
 
-            {/*details modal */}
-            {
-                isModalOpen && (
-                    <DetailsModal
-                        product={selectedProduct}
-                        onClose={handleCloseModal}
-                        onAddToCart={handleAddToCart}
-                    />
-                )
-            }
+                    </div>
+                </div>
+            </div>
+
+
 
         </section >
     )

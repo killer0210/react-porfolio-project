@@ -4,9 +4,9 @@ import CopyEmailButton from '../components/CopyEmailButton'
 
 const About = () => {
     return (
-        <section className='c-space section-spacing' id='about'>
+        <section className='c-space pt-20 md:pt-30 ' id='about'>
             <h2 className='text-heading'>About Me</h2>
-            <div className='grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[18rem] mt-12'>
+            <div className='grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[18rem]  mt-12'>
                 {/*grid 1 */}
                 <div className='flex items-end grid-default-color grid-1'>
                     <img src="/src/assets/coding-pov.png" alt="" className='absolute scale-[1.75] -right-[5rem] -top-[1rem] md:scale-[3] md:left-50 md:inset-y-10 lg:scale-[2.5]' />
